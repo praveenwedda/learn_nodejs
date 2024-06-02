@@ -35,9 +35,11 @@ function fibo(n) {
 }
 
 let num = 0;
+let thatarray = [];
 
 function runner(num) {
-  console.log(fibo(num));
+  thatarray.push(fibo(num));
+  console.log(thatarray);
   num++;
   runner(num);
 }
