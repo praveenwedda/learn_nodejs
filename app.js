@@ -9,17 +9,39 @@
 // // namer(name2);
 // // namer(name3);
 
-const os = require("os");
+// const os = require("os");
 
-const userinfo = os.userInfo();
-console.log(userinfo);
-console.log(os.uptime());
+// const userinfo = os.userInfo();
+// console.log(userinfo);
+// console.log(os.uptime());
 
-const currentsystemstat = {
-  name: os.type(),
-  release: os.release(),
-  totalMemory: os.totalmem(),
-  freeMemory: os.freemem(),
-};
+// const currentsystemstat = {
+//   name: os.type(),
+//   release: os.release(),
+//   totalMemory: os.totalmem(),
+//   freeMemory: os.freemem(),
+// };
 
-console.log(currentsystemstat);
+// console.log(currentsystemstat);
+
+function fibo(n) {
+  if (n === 0) {
+    return 1;
+  } else if (n === 1) {
+    return 1;
+  } else {
+    return fibo(n - 1) + fibo(n - 2);
+  }
+}
+
+let num = 0;
+
+function runner(num) {
+  console.log(fibo(num));
+  num++;
+  runner(num);
+}
+
+runner(num);
+
+//-------------Above is how we recurse to get fibonacci series--------------------------
