@@ -64,15 +64,62 @@
 // console.log(f);
 //----------------------Above is everything we did in terms of path module--------------
 
-const { readFileSync, writeFileSync } = require("fs");
+// const { readFileSync, writeFileSync } = require("fs");
 
-const r1 = readFileSync("./content/text.txt", "utf8");
-console.log(r1);
+// const r1 = readFileSync("./content/text.txt", "utf8");
+// console.log(r1);
 
-const p = "Praveen will be a great coder in the name of Jesus!";
+// const p = "Praveen will be a great coder in the name of Jesus!";
 
-writeFileSync("./content/result.txt", p);
-const r2 = readFileSync("./content/result.txt", "utf8"); //when you are writing to a file, the content it has prior to writing attempt gets erased pr
-console.log(r2);
+// writeFileSync("./content/result.txt", p);
+// const r2 = readFileSync("./content/result.txt", "utf8"); //when you are writing to a file, the content it has prior to writing attempt gets erased pr
+// console.log(r2);
 
 //-------------Above is about reading and writing to files using fs module------------
+
+
+const {readFile, writeFile, writeFileSync} = require("fs")
+
+readFile("./content/first.txt", "utf8", (err, result) => {
+    if (err){
+        console.log(err);
+        return
+    }
+    
+        const first = result;
+        console.log(first);
+
+        readFile("./content/second.txt", "utf8", (err, result) => {
+            if (err){
+                console.log(err);
+                return
+            }
+            
+                const second = result
+                console.log(second);
+                writeFileSync("./content/result.txt", `first item is ${first} and second item is ${second}`, {flag: 'a'}); //check if this issue exists
+
+
+        
+        
+    })
+    
+})
+
+// readFile("./content/result.txt", "utf8", (err, result) => {
+//     if (err){
+//         console.log(err);
+//     }
+//     else {
+//         const second = result;
+//         console.log(second);
+//         // writeFile("./content/result.txt", first, {flag: 'a'});
+//     }
+// })
+
+
+
+
+
+
+
