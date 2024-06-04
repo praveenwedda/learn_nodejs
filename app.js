@@ -49,4 +49,16 @@
 //-------------Above is how we recurse to get fibonacci series--------------------------
 
 const k = require("path");
-console.log(k);
+// console.log(k);
+
+const c = k.sep;
+// console.log(c);
+
+const a = k.resolve(__dirname, "app.js");
+// console.log(a);
+
+const b = k.join("app.js", "namer.js"); //put a directory inside another
+// console.log(b);
+
+const f = k.basename(b);
+console.log(f);
