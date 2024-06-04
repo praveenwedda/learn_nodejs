@@ -78,6 +78,7 @@
 //-------------Above is about reading and writing to files using fs module------------
 
 
+const { log } = require("console");
 const {readFile, writeFile, writeFileSync} = require("fs")
 
 readFile("./content/first.txt", "utf8", (err, result) => {
@@ -97,7 +98,14 @@ readFile("./content/first.txt", "utf8", (err, result) => {
             
                 const second = result
                 console.log(second);
-                writeFileSync("./content/result.txt", `first item is ${first} and second item is ${second}`, {flag: 'a'}); //check if this issue exists
+                writeFile("./content/result.txt", `first item is ${first} and second item is ${second}`, {flag: 'a'}, (err, result)=>{
+                    if(err){
+                        console.log(err);
+                    }
+
+                    console.log(result);
+
+                }); //check if this issue exists
 
 
         
