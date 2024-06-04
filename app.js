@@ -24,26 +24,29 @@
 
 // console.log(currentsystemstat);
 
-function fibo(n) {
-  if (n === 0) {
-    return 1;
-  } else if (n === 1) {
-    return 1;
-  } else {
-    return fibo(n - 1) + fibo(n - 2);
-  }
-}
+// function fibo(n) {
+//   if (n === 0) {
+//     return 1;
+//   } else if (n === 1) {
+//     return 1;
+//   } else {
+//     return fibo(n - 1) + fibo(n - 2);
+//   }
+// }
 
-let num = 0;
-let thatarray = [];
+// let num = 0;
+// let thatarray = [];
 
-function runner(num) {
-  thatarray.push(fibo(num));
-  console.log(thatarray);
-  num++;
-  runner(num);
-}
+// function runner(num) {
+//   thatarray.push(fibo(num));
+//   console.log(thatarray);
+//   num++;
+//   runner(num);
+// }
 
-runner(num);
+// runner(num);
 
 //-------------Above is how we recurse to get fibonacci series--------------------------
+
+const k = require("path");
+console.log(k);
