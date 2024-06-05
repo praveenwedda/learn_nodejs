@@ -118,20 +118,22 @@
 const http = require('http');
 
 const server = http.createServer((req, res)=> {
-    console.log(req);
+    // console.log(req);
     if(req.url === '/'){
         res.end('this is the home page')
-    }
+    } 
     
-    if (req.url === '/about'){
+    else if (req.url === '/about'){
         res.end('this is the about page')
     }
 
-    res.end(`
+    else {res.end(`
     <h1>Oops something went wrong!</h1>
-     <a href = "/">Home</a>`)
-    res.write("Hello world!")
-    res.end()
+     <a href = "/">Home</a>`);
+    // res.write("Hello world!")
+    // res.end()
+    }
+
 })
 
 server.listen(5000);
