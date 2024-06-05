@@ -78,52 +78,63 @@
 //-------------Above is about reading and writing to files using fs module------------
 
 
-const { log } = require("console");
-const {readFile, writeFile, writeFileSync} = require("fs")
+// const { log } = require("console");
+// const {readFile, writeFile, writeFileSync} = require("fs")
 
-readFile("./content/first.txt", "utf8", (err, result) => {
-    if (err){
-        console.log(err);
-        return
-    }
-    
-        const first = result;
-        console.log(first);
-
-        readFile("./content/second.txt", "utf8", (err, result) => {
-            if (err){
-                console.log(err);
-                return
-            }
-            
-                const second = result
-                console.log(second);
-                writeFile("./content/result.txt", `first item is ${first} and second item is ${second}`, {flag: 'a'}, (err, result)=>{
-                    if(err){
-                        console.log(err);
-                    }
-
-                    console.log(result);
-
-                }); //check if this issue exists
-
-
-        
-        
-    })
-    
-})
-
-// readFile("./content/result.txt", "utf8", (err, result) => {
+// readFile("./content/first.txt", "utf8", (err, result) => {
 //     if (err){
 //         console.log(err);
+//         return
 //     }
-//     else {
-//         const second = result;
-//         console.log(second);
-//         // writeFile("./content/result.txt", first, {flag: 'a'});
-//     }
+    
+//         const first = result;
+//         console.log(first);
+
+//         readFile("./content/second.txt", "utf8", (err, result) => {
+//             if (err){
+//                 console.log(err);
+//                 return
+//             }
+            
+//                 const second = result
+//                 console.log(second);
+//                 writeFile("./content/result.txt", `first item is ${first} and second item is ${second}`, {flag: 'a'}, (err, result)=>{
+//                     if(err){
+//                         console.log(err);
+//                     }
+
+//                     console.log(result);
+
+//                 }); 
+
+        
+        
+//     })
+    
 // })
+
+//------------playing around with http module-------------------------------------------------------
+
+const http = require('http');
+
+const server = http.createServer((req, res)=> {
+    console.log(req);
+    if(req.url === '/'){
+        res.end('this is the home page')
+    }
+    
+    if (req.url === '/about'){
+        res.end('this is the about page')
+    }
+
+    res.end(`
+    <h1>Oops something went wrong!</h1>
+     <a href = "/">Home</a>`)
+    res.write("Hello world!")
+    res.end()
+})
+
+server.listen(5000);
 
 
 
