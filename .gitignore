@@ -1,0 +1,2 @@
+node_modules/
+#above line helps exclude node_modules file changes when pushing code since those modules can be installed later using npm install
