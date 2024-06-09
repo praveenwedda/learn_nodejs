@@ -112,23 +112,57 @@
 
 //------------playing around with http module-------------------------------------------------------
 
-const http = require("http");
+// const http = require("http");
 
-const server = http.createServer((req, res) => {
-  // console.log(req);
-  if (req.url === "/") {
-    res.end("this is the home page");
-  } else if (req.url === "/about") {
-    res.end("this is the about page");
-  } else {
-    res.end(`
-    <h1>Oops something went wrong!</h1>
-     <a href = "/">Home</a>`);
-    // res.write("Hello world!")
-    // res.end()
-  }
-});
+// const server = http.createServer((req, res) => {
+//   console.log(`request received`);
+//   if (req.url === "/") {
+//     res.end("this is the home page");
+//   } else if (req.url === "/about") {
+//     res.end("this is the about page");
+//   } else if (req.url === "/portfolio") {
+//     res.end("this is the portfolio page");
+//   } else {
+//     res.end(`
+//     <h1>Oops something went wrong!</h1>
+//      <a href = "/">Home</a>`);
+//     // res.write("Hello world!")
+//     // res.end()
+//   }
+// });
 
-server.listen(5000, () => {
-  console.log(`server listening to port 5000...`);
-});
+// server.listen(5000, () => {
+//   console.log(`server listening to port 5000...`);
+// });
+
+//-----------------------reading multiple files----------------------------------------------
+
+const { readFile } = require("fs");
+
+// readFile("./content/first.txt", "utf8", (err, data) => {
+//   if (err) {
+//     console.log(err);
+//     return;
+//   } else {
+//     console.log(data);
+//   }
+// });
+
+//------------------------turning above code to a promise---------------------------------------
+
+const getText = (path) => {
+  return new Promise((resolve, reject) => {
+    readFile(path, "utf8", (err, data) => {
+      if (err) {
+        console.log(err);
+        reject(err);
+      } else {
+        resolve(data);
+      }
+    });
+  });
+};
+
+getText("./content/first.txt")
+  .then((result) => console.log(result))
+  .catch((err) => console.log(err));
