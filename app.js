@@ -77,7 +77,6 @@
 
 //-------------Above is about reading and writing to files using fs module------------
 
-
 // const { log } = require("console");
 // const {readFile, writeFile, writeFileSync} = require("fs")
 
@@ -86,7 +85,7 @@
 //         console.log(err);
 //         return
 //     }
-    
+
 //         const first = result;
 //         console.log(first);
 
@@ -95,7 +94,7 @@
 //                 console.log(err);
 //                 return
 //             }
-            
+
 //                 const second = result
 //                 console.log(second);
 //                 writeFile("./content/result.txt", `first item is ${first} and second item is ${second}`, {flag: 'a'}, (err, result)=>{
@@ -105,42 +104,31 @@
 
 //                     console.log(result);
 
-//                 }); 
+//                 });
 
-        
-        
 //     })
-    
+
 // })
 
 //------------playing around with http module-------------------------------------------------------
 
-const http = require('http');
+const http = require("http");
 
-const server = http.createServer((req, res)=> {
-    // console.log(req);
-    if(req.url === '/'){
-        res.end('this is the home page')
-    } 
-    
-    else if (req.url === '/about'){
-        res.end('this is the about page')
-    }
-
-    else {res.end(`
+const server = http.createServer((req, res) => {
+  // console.log(req);
+  if (req.url === "/") {
+    res.end("this is the home page");
+  } else if (req.url === "/about") {
+    res.end("this is the about page");
+  } else {
+    res.end(`
     <h1>Oops something went wrong!</h1>
      <a href = "/">Home</a>`);
     // res.write("Hello world!")
     // res.end()
-    }
+  }
+});
 
-})
-
-server.listen(5000);
-
-
-
-
-
-
-
+server.listen(5000, () => {
+  console.log(`server listening to port 5000...`);
+});
