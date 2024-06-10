@@ -137,8 +137,10 @@
 
 //-----------------------reading multiple files----------------------------------------------
 
-const { readFile } = require("fs");
+
 const { get } = require("http");
+
+
 
 // readFile("./content/first.txt", "utf8", (err, data) => {
 //   if (err) {
@@ -151,29 +153,38 @@ const { get } = require("http");
 
 //------------------------turning above code to a promise---------------------------------------
 
-const getText = (path) => {
-  return new Promise((resolve, reject) => {
-    readFile(path, "utf8", (err, data) => {
-      if (err) {
-        console.log(err);
-        reject(err);
-      } else {
-        resolve(data);
-      }
-    });
-  });
-};
+// const getText = (path) => {
+//   return new Promise((resolve, reject) => {
+//     readFile(path, "utf8", (err, data) => {
+//       if (err) {
+//         console.log(err);
+//         reject(err);
+//       } else {
+//         resolve(data);
+//       }
+//     });
+//   });
+// };
 
 // getText("./content/first.txt")
 //   .then((result) => console.log(result))
 //   .catch((err) => console.log(err));
 
+
+const { readFile, writeFile } = require("fs");
+const  util  = require("util");
+const readFilePromise = util.promisify(readFile)
+const writeFilePromise = util.promisify(writeFile)
+
+
 const start = async() => {
   try {
-    const first = await getText("./content/first.txt");
-    const second = await getText("./content/second.txt");
-    console.log(first);
-    console.log(second);
+    const first = await readFilePromise("./content/first.txt", "utf8");
+    const second = await readFilePromise("./content/second.txt", "utf8");
+    await writeFilePromise("./content/result.txt", `${first} and ${second}`)
+    const third = await readFilePromise("./content/result.txt", "utf8");
+    console.log(third);
+    
   } catch (error) {
     console.log(error);
     
