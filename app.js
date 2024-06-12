@@ -205,3 +205,21 @@ customEmitter.on("response", (name, id, other) => {
 });
 
 customEmitter.emit("response", "Praveen", 2300, "hey");
+
+//-------------turning up a server using events----------------------------------------------------
+const http = require("http");
+
+const server = http.createServer();
+
+server.on("request", (req, res) => {
+  console.log(`request received`);
+  if (req.url === "/") {
+    res.end("this is the home page");
+  }
+});
+
+server.listen(5000, () => {
+  console.log(`server listening to port 5000...`);
+});
+
+//-----server event does not emit anything---------------
