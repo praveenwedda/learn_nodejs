@@ -133,63 +133,75 @@
 
 // server.listen(5000, () => {
 //   console.log(`server listening to port 5000...`);
-// });
+// // });
 
-//-----------------------reading multiple files----------------------------------------------
+// //-----------------------reading multiple files----------------------------------------------
 
+// const { get } = require("http");
 
-const { get } = require("http");
+// // readFile("./content/first.txt", "utf8", (err, data) => {
+// //   if (err) {
+// //     console.log(err);
+// //     return;
+// //   } else {
+// //     console.log(data);
+// //   }
+// // });
 
+// //------------------------turning above code to a promise---------------------------------------
 
+// // const getText = (path) => {
+// //   return new Promise((resolve, reject) => {
+// //     readFile(path, "utf8", (err, data) => {
+// //       if (err) {
+// //         console.log(err);
+// //         reject(err);
+// //       } else {
+// //         resolve(data);
+// //       }
+// //     });
+// //   });
+// // };
 
-// readFile("./content/first.txt", "utf8", (err, data) => {
-//   if (err) {
-//     console.log(err);
-//     return;
-//   } else {
-//     console.log(data);
+// // getText("./content/first.txt")
+// //   .then((result) => console.log(result))
+// //   .catch((err) => console.log(err));
+
+// const { readFile, writeFile } = require("fs");
+// const util = require("util");
+// const readFilePromise = util.promisify(readFile);
+// const writeFilePromise = util.promisify(writeFile);
+// //
+
+// const start = async () => {
+//   try {
+//     const first = await readFilePromise("./content/first.txt", "utf8");
+//     const second = await readFilePromise("./content/second.txt", "utf8");
+//     await writeFilePromise(
+//       "./content/result.txt",
+//       `|||| || | ${first} and ${second}`
+//     );
+//     const third = await readFilePromise("./content/result.txt", "utf8");
+//     console.log(third);
+//   } catch (error) {
+//     console.log(error);
 //   }
-// });
-
-//------------------------turning above code to a promise---------------------------------------
-
-// const getText = (path) => {
-//   return new Promise((resolve, reject) => {
-//     readFile(path, "utf8", (err, data) => {
-//       if (err) {
-//         console.log(err);
-//         reject(err);
-//       } else {
-//         resolve(data);
-//       }
-//     });
-//   });
 // };
 
-// getText("./content/first.txt")
-//   .then((result) => console.log(result))
-//   .catch((err) => console.log(err));
+// start();
 
+//----------event management work below this---------------------------------------------------
 
-const { readFile, writeFile } = require("fs");
-const  util  = require("util");
-const readFilePromise = util.promisify(readFile)
-const writeFilePromise = util.promisify(writeFile)
-//
+const EventEmitter = require("events");
 
-const start = async() => {
-  try {
-    const first = await readFilePromise("./content/first.txt", "utf8");
-    const second = await readFilePromise("./content/second.txt", "utf8");
-    await writeFilePromise("./content/result.txt", `${first} and ${second}`)
-    const third = await readFilePromise("./content/result.txt", "utf8");
-    console.log(third);
-    
-  } catch (error) {
-    console.log(error);
-    
-  }
-  
-}
+const customEmitter = new EventEmitter();
 
-start();
+customEmitter.on("response", (name, id) => {
+  console.log(`data received of user ${name} with ID ${id}`);
+});
+
+customEmitter.on("response", (name, id, other) => {
+  console.log(`something else of ${other}`);
+});
+
+customEmitter.emit("response", "Praveen", 2300, "hey");
